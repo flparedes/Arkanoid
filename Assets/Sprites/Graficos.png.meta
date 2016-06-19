@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: bd2e88930e7aefe4584e960dc2f95c4d
-timeCreated: 1464474843
+timeCreated: 1466329442
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,7 @@ TextureImporter:
     21300002: Ball
     21300004: ShipSide
     21300006: ShipBody
+    21300008: Heart
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -60,15 +61,15 @@ TextureImporter:
         x: 2
         y: 57
         width: 168
-        height: 59
+        height: 60
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -84, y: 29.5}
-        - {x: -84, y: -29.5}
-        - {x: 84, y: -29.5}
-        - {x: 84, y: 29.5}
+      - - {x: -84, y: 30}
+        - {x: -84, y: -30}
+        - {x: 84, y: -30}
+        - {x: 84, y: 30}
     - name: Ball
       rect:
         serializedVersion: 2
@@ -80,45 +81,63 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -33, y: -32.5}
-        - {x: 21, y: -32.5}
-        - {x: 33, y: -26.5}
-        - {x: 33, y: 29.5}
-        - {x: 32, y: 32.5}
-        - {x: -31, y: 32.5}
-        - {x: -33, y: 26.5}
+      - - {x: -22, y: 32.5}
+        - {x: -33, y: 27.5}
+        - {x: -33, y: -17.5}
+        - {x: -19, y: -32.5}
+        - {x: 30, y: -32.5}
+        - {x: 33, y: -21.5}
+        - {x: 33, y: 25.5}
+        - {x: 28, y: 32.5}
     - name: ShipSide
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
+        width: 33
         height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -3, y: 24}
-        - {x: -16, y: 17}
-        - {x: -16, y: -18}
-        - {x: -8, y: -24}
-        - {x: 16, y: -24}
-        - {x: 16, y: 24}
+      - - {x: -7.5, y: 24}
+        - {x: -16.5, y: 16}
+        - {x: -16.5, y: -18}
+        - {x: -9.5, y: -24}
+        - {x: 16.5, y: -24}
+        - {x: 16.5, y: 24}
     - name: ShipBody
       rect:
         serializedVersion: 2
-        x: 51
+        x: 36
         y: 0
-        width: 151
+        width: 153
         height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -75.5, y: 24}
-        - {x: -75.5, y: -24}
-        - {x: 75.5, y: -24}
-        - {x: 75.5, y: 24}
+      - - {x: -76.5, y: 24}
+        - {x: -76.5, y: -24}
+        - {x: 76.5, y: -24}
+        - {x: 76.5, y: 24}
+    - name: Heart
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 51
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -25.5, y: 22}
+        - {x: -25.5, y: -4}
+        - {x: -7.5, y: -22}
+        - {x: 7.5, y: -22}
+        - {x: 25.5, y: -10}
+        - {x: 25.5, y: 22}
     outline: []
   spritePackingTag: 
   userData: 

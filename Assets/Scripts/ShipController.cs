@@ -11,9 +11,25 @@ public class ShipController : MonoBehaviour
     private bool leftLimit = false;
     private bool rightLimit = false;
 
+    public float shipWidth;
+
     // Use this for initialization
     void Start()
     {
+        this.calculateShipWidth();
+    }
+
+    private void calculateShipWidth()
+    {
+        shipWidth = 0;
+        Renderer[] renders = this.GetComponentsInChildren<Renderer>();
+        Debug.Log("calculateShipWidth. renders: " + renders);
+        foreach (Renderer render in  renders)
+        {
+            Debug.Log("calculateShipWidth. render.size: " + render.bounds.size);
+            shipWidth += render.bounds.size.x;
+        }
+        Debug.Log("calculateShipWidth. shipWidth: " + shipWidth);
     }
 
     // Update is called once per frame
@@ -78,5 +94,12 @@ public class ShipController : MonoBehaviour
         }
 
         this.ball.transform.position = ballSpawner.transform.position;
+    }
+
+    public void newBall(GameObject oldBall)
+    {
+        GameObject newBallGameObj = Instantiate(oldBall);
+        Ball ball = newBallGameObj.GetComponent<Ball>();
+        this.initBall(ball);
     }
 }

@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class HUDScore : MonoBehaviour {
+public class HUDRecord : MonoBehaviour
+{
 
     private Text text;
 
@@ -15,7 +16,7 @@ public class HUDScore : MonoBehaviour {
 
     void Update()
     {
-        // Set the displayed text to be the word "Score" followed by the score value.
-        text.text = "Score: " + PlayerData.score;
+        // Set the displayed text to be the word "Record" followed by the scoreRecord value.
+        text.text = "Record: " + PlayerData.scoreRecord;
     }
 }

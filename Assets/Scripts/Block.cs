@@ -8,7 +8,7 @@ public class Block : MonoBehaviour {
 
     public void DestroyBlock()
     {
-        HUDScore.score += scorePoints;
+        PlayerData.score += scorePoints;
         Destroy(this.gameObject);
     }
 }
