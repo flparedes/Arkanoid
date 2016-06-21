@@ -8,6 +8,9 @@ public class PlayerData : MonoBehaviour {
     public static int scoreRecord = 0;
     public static int blockCount = 0;
 
+    private GameObject gameOverObj;
+    private bool gameOver = false;
+
     public string nextLevel = "NextLevelName";
 
     void Awake()
@@ -18,6 +21,8 @@ public class PlayerData : MonoBehaviour {
         scoreRecord = PlayerPrefs.GetInt("scoreRecord");
 
         blockCount = GameObject.FindGameObjectsWithTag("Block").Length;
+        gameOverObj = GameObject.FindGameObjectWithTag("GameOver");
+        gameOverObj.SetActive(false);
     }
 
     void Update()
@@ -44,15 +49,37 @@ public class PlayerData : MonoBehaviour {
 
     private void GameOver()
     {
-        // Check Record
-        if (score > scoreRecord)
+        if (!gameOver)
         {
-            scoreRecord = score;
-        }
+            Debug.Log("¡¡¡¡GAME OVER!!!!");
+            // Display text
+            Debug.Log("gameOverObj.active: " + gameOverObj.activeSelf);
+            if (gameOverObj != null)
+            {
+                gameOverObj.SetActive(true);
+            }
 
-        // Reset variables
-        PlayerPrefs.SetInt("lives", 3);
-        PlayerPrefs.SetInt("score", 0);
-        PlayerPrefs.SetInt("scoreRecord", scoreRecord);
+            // Check Record
+            if (score > scoreRecord)
+            {
+                scoreRecord = score;
+            }
+
+            // Reset variables
+            PlayerPrefs.SetInt("lives", 3);
+            PlayerPrefs.SetInt("score", 0);
+            PlayerPrefs.SetInt("scoreRecord", scoreRecord);
+
+            gameOver = true;
+        }
+        else
+        {
+            var shoot = Input.GetButton("Jump");
+
+            if (shoot)
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
     }
 }

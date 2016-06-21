@@ -9,6 +9,7 @@ public class Block : MonoBehaviour {
     public void DestroyBlock()
     {
         PlayerData.score += scorePoints;
+        PlayerData.blockCount--;
         Destroy(this.gameObject);
     }
 }

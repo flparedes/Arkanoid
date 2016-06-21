@@ -98,8 +98,11 @@ public class ShipController : MonoBehaviour
 
     public void newBall(GameObject oldBall)
     {
-        GameObject newBallGameObj = Instantiate(oldBall);
-        Ball ball = newBallGameObj.GetComponent<Ball>();
-        this.initBall(ball);
+        if (PlayerData.lives > 0)
+        {
+            GameObject newBallGameObj = Instantiate(oldBall);
+            Ball ball = newBallGameObj.GetComponent<Ball>();
+            this.initBall(ball);
+        }
     }
 }
