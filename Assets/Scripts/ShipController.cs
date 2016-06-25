@@ -21,14 +21,8 @@ public class ShipController : MonoBehaviour
 
     private void calculateShipWidth()
     {
-        shipWidth = 0;
-        Renderer[] renders = this.GetComponentsInChildren<Renderer>();
-        Debug.Log("calculateShipWidth. renders: " + renders);
-        foreach (Renderer render in  renders)
-        {
-            Debug.Log("calculateShipWidth. render.size: " + render.bounds.size);
-            shipWidth += render.bounds.size.x;
-        }
+        BoxCollider2D col = this.GetComponent<BoxCollider2D>();
+        shipWidth = col.size.x; 
         Debug.Log("calculateShipWidth. shipWidth: " + shipWidth);
     }
 
@@ -74,8 +68,8 @@ public class ShipController : MonoBehaviour
         string objectName = collision.gameObject.name;
         string tagName = collision.gameObject.tag;
 
-        Debug.Log("-- Ship - Enter collision with: " + objectName);
-        Debug.Log("-- Ship - Enter collision with tag: " + tagName);
+        // Debug.Log("-- Ship - Enter collision with: " + objectName);
+        // Debug.Log("-- Ship - Enter collision with tag: " + tagName);
 
         if (tagName == "Wall")
         {

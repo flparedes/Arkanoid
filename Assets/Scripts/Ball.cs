@@ -69,7 +69,6 @@ public class Ball : MonoBehaviour
         // Si es la primer colisión detectada en este Frame.
         if (!collisionNow)
         {
-            this.increaseSpeed();
             collisionNow = true;
         }
 
@@ -77,6 +76,7 @@ public class Ball : MonoBehaviour
         if ("Block" == collision.gameObject.tag)
         {
             // Destroy(collision.gameObject);
+            this.increaseSpeed();
             Block block = collision.gameObject.GetComponent<Block>();
             block.DestroyBlock();
         }
@@ -92,29 +92,46 @@ public class Ball : MonoBehaviour
 
         if (tagName == "Player")
         {
-            Debug.Log("Collision with Player Ship");
             // Vector2 shipPosition = new Vector2(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y);
             // vectorColision += (ballPosition - shipPosition);
             GameObject ship = collision.gameObject;
             Vector2 shipPosition = ship.transform.position;
-            Debug.Log("shipPosition: " + shipPosition);
 
             ShipController shipCont = ship.GetComponent<ShipController>();
-            Debug.Log("shipWidth: " + shipCont.shipWidth);
 
             ContactPoint2D[] contacts = collision.contacts;
-            Debug.Log("Collision contacts points: " + contacts);
 
             foreach (ContactPoint2D contact in contacts)
             {
-                // Debug.Log("Contact point. X=" + contact.point.x + " Y =" + contact.point.y);
-                // vectorColision += (ballPosition - contact.point);
-                vectorColision += contact.normal;
-                Debug.Log("Contact point: " + contact.point);
+                float leftShipPos = shipPosition.x - (shipCont.shipWidth / 2);
+                float shipRelativeContact = contact.point.x - leftShipPos;
 
-                Debug.Log("left shipPosition: " + (shipPosition.x - (shipCont.shipWidth / 2)));
-                float shipRelativeContact = contact.point.x - shipPosition.x - (shipCont.shipWidth / 2);
-                Debug.Log("shipRelativeContact: " + shipRelativeContact);
+                // Relative es desde 0 a 1, siendo 0 totalmente a la izquierda y 1 totalmente a la derecha
+                float relative = shipRelativeContact / shipCont.shipWidth;
+
+                if (relative < 0.3f)
+                {
+                    Debug.Log("Ball -- contact Left side.");
+                    this.collisionNow = true;
+                    float range = (0.3f - relative) / 0.3f;
+                    this.updateMoveDirection(range);
+                }
+                else if (relative >= 0.3f && relative <= 0.7f)
+                {
+                    Debug.Log("Ball -- contact Center.");
+                    vectorColision = contact.normal;
+                }
+                else
+                {
+                    if (relative > 1)
+                    {
+                        relative = 1;
+                    }
+                    Debug.Log("Ball -- contact Right side.");
+                    this.collisionNow = true;
+                    float range = (0.7f - relative) / 0.3f;
+                    this.updateMoveDirection(range);
+                }
             }
         }
         else
@@ -130,6 +147,14 @@ public class Ball : MonoBehaviour
                 vectorColision += contact.normal;
             }
         }
+    }
+
+    private void updateMoveDirection(float range)
+    {
+        float angle = range * 45;
+        Debug.Log("Ball -- updateMoveAngle. angle: " + angle);
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+        moveDirection = rotation * Vector2.up;
     }
 
     private void increaseSpeed()
